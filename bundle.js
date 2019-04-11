@@ -63,11 +63,17 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+module.exports = require("blessed-vue");
+
+/***/ }),
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80,6 +86,8 @@
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
+  computed: {
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -89,14 +97,14 @@
 
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(1);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_472cff63_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(5);
-var normalizeComponent = __webpack_require__(4)
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_472cff63_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(6);
+var normalizeComponent = __webpack_require__(5)
 /* script */
 
 
@@ -124,24 +132,48 @@ Component.options.__file = "App.vue"
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("blessed-vue");
-
-/***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blessed_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuex__);
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_blessed_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex___default.a)
+
+const state = {}
+const mutations = {}
+const actions = {}
+const getters = {}
+
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex___default.a.Store({
+  state,
+  getters,
+  actions,
+  mutations
+}));
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blessed_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(3);
+
 
 
 
 const el = __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default.a.dom.createElement()
+
 __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default.a.dom.append(el)
 
 const vm = new __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default.a({
@@ -149,12 +181,13 @@ const vm = new __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default.a({
   components: {
     App: __WEBPACK_IMPORTED_MODULE_1__App_vue__["a" /* default */]
   },
+  store: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */],
   template: '<App/>'
 }).$mount(el)
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -263,7 +296,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -274,13 +307,19 @@ var render = function() {
   return _c(
     "screen",
     { ref: "screen", attrs: { smartCSR: true, keys: true } },
-    [_vm._v("\n  " + _vm._s(_vm.msg) + "\n")]
+    [_c("text", [_vm._v(_vm._s(_vm.msg))])]
   )
 }
 var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("vuex");
 
 /***/ })
 /******/ ])));
