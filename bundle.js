@@ -90,7 +90,7 @@ module.exports = require("blessed-vue");
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: ' # Hello \n blessed-contrib renders markdown using `marked-terminal`'
     }
   }
 });
@@ -307,7 +307,8 @@ var render = function() {
   return _c(
     "screen",
     { ref: "screen", attrs: { smartCSR: true, keys: true } },
-    [_c("text", [_vm._v(_vm._s(_vm.msg))])]
+    [_c("markdown", { attrs: { markdown: _vm.msg } })],
+    1
   )
 }
 var staticRenderFns = []

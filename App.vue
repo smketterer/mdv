@@ -1,6 +1,6 @@
 <template>
   <screen ref='screen' :smartCSR="true" :keys="true">
-    <text>{{ msg }}</text>
+    <markdown :markdown="msg"></markdown>
   </screen>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: ' # Hello \n blessed-contrib renders markdown using `marked-terminal`'
     }
   }
 }
