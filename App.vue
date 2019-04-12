@@ -8,9 +8,10 @@
 </template>
 
 <script>
-var fs = require('fs')
-var marked = require('marked')
-var TerminalRenderer = require('marked-terminal')
+const fs = require('fs')
+const marked = require('marked')
+const TerminalRenderer = require('marked-terminal')
+const highlight = require('cli-highlight').highlight
 
 marked.setOptions({
   renderer: new TerminalRenderer()
@@ -30,12 +31,20 @@ export default {
       process.exit(0)
     })
 
+    // Error if no file provided.
+    if (typeof process.argv[2] === 'undefined') {
+      throw new Error("No file provided.")
+    }
+
     // Set the file
     this.file = process.argv[2]
 
     // Read file with UTF-8 encoding
      fs.readFile(`./${ this.file }`, 'utf8', (err, contents) => {
+       // Generates SGR sequences which can be read by blessed.
        this.fileContents = marked(contents)
+       fs.writeFile("log.txt", this.fileContents, function(e) {});
+       // Go through and syntax highlight afterwords...
      })
     // console.log(marked(this.fileContents))
   }

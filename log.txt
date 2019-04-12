@@ -1,0 +1,12 @@
+[35m[4m[1m# mdp[22m[24m[39m
+
+[0mIt's in the game.[0m
+
+[0mHere's some stuff:[0m
+
+    * [0mList goes Here[0m
+    * [0mAnother [3mlist[23m.[0m
+    * [0mMore [1mstyling[22m.[0m
+
+    [33m  from django.auth.models import User[39m
+    [33m  User.objects.all()[39m

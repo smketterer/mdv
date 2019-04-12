@@ -87,9 +87,10 @@ module.exports = require("blessed-vue");
 //
 //
 
-var fs = __webpack_require__(7)
-var marked = __webpack_require__(8)
-var TerminalRenderer = __webpack_require__(9)
+const fs = __webpack_require__(8)
+const marked = __webpack_require__(9)
+const TerminalRenderer = __webpack_require__(10)
+const highlight = __webpack_require__(7).highlight
 
 marked.setOptions({
   renderer: new TerminalRenderer()
@@ -109,12 +110,20 @@ marked.setOptions({
       process.exit(0)
     })
 
+    // Error if no file provided.
+    if (typeof process.argv[2] === 'undefined') {
+      throw new Error("No file provided.")
+    }
+
     // Set the file
     this.file = process.argv[2]
 
     // Read file with UTF-8 encoding
      fs.readFile(`./${ this.file }`, 'utf8', (err, contents) => {
+       // Generates SGR sequences which can be read by blessed.
        this.fileContents = marked(contents)
+       fs.writeFile("log.txt", this.fileContents, function(e) {});
+       // Go through and syntax highlight afterwords...
      })
     // console.log(marked(this.fileContents))
   }
@@ -163,7 +172,7 @@ Component.options.__file = "App.vue"
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blessed_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuex__);
 
 
@@ -376,22 +385,28 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("fs");
+module.exports = require("cli-highlight");
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = require("marked");
+module.exports = require("fs");
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = require("marked-terminal");
+module.exports = require("marked");
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("marked-terminal");
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("vuex");
