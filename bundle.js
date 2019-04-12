@@ -83,15 +83,40 @@ module.exports = require("blessed-vue");
 //
 //
 //
+//
+//
+//
+
+var fs = __webpack_require__(7)
+var marked = __webpack_require__(8)
+var TerminalRenderer = __webpack_require__(9)
+
+marked.setOptions({
+  renderer: new TerminalRenderer()
+})
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
-  computed: {
-  },
-  data () {
+  data: function() {
     return {
-      msg: ' # Hello \n blessed-contrib renders markdown using `marked-terminal`'
+      file: '',
+      fileContents: '',
     }
+  },
+  mounted: function() {
+    // Close the program when CTRL+C is pressed.
+    this.$refs.screen.key(['C-c'], () => {
+      process.exit(0)
+    })
+
+    // Set the file
+    this.file = process.argv[2]
+
+    // Read file with UTF-8 encoding
+     fs.readFile(`./${ this.file }`, 'utf8', (err, contents) => {
+       this.fileContents = marked(contents)
+     })
+    // console.log(marked(this.fileContents))
   }
 });
 
@@ -117,7 +142,7 @@ var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
-var __vue_module_identifier__ = "703d5ee0"
+var __vue_module_identifier__ = "7f7de4c0"
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_472cff63_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
@@ -138,7 +163,7 @@ Component.options.__file = "App.vue"
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blessed_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuex__);
 
 
@@ -306,8 +331,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "screen",
-    { ref: "screen", attrs: { smartCSR: true, keys: true } },
-    [_c("markdown", { attrs: { markdown: _vm.msg } })],
+    {
+      ref: "screen",
+      attrs: { smartCSR: true, autoPadding: true, title: "" + this.file }
+    },
+    [
+      _c(
+        "box",
+        {
+          staticStyle: { bg: "white" },
+          attrs: { top: 0, left: 0, height: "100%", width: "100%" }
+        },
+        [
+          _c("text", {
+            staticStyle: { bg: "white", fg: "black", bold: "true" },
+            attrs: { top: "0", left: "center", content: "file: " + this.file }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("box", {
+        attrs: {
+          top: 1,
+          left: 0,
+          height: "100%",
+          width: "100%",
+          border: { type: "bg" },
+          alwaysScroll: true,
+          scrollable: true,
+          mouse: true,
+          content: this.fileContents
+        }
+      })
+    ],
     1
   )
 }
@@ -318,6 +374,24 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("marked");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("marked-terminal");
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("vuex");
