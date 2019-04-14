@@ -10,7 +10,13 @@ Here's some stuff:
 - Another _list_.
 - More **styling**.
 
-!!!**Test content** goes here
+| Tables   |      Are      |  Cool |
+|----------|:-------------:|------:|
+| col 1 is |  left-aligned | $1600 |
+| col 2 is |    centered   |   $12 |
+| col 3 is | right-aligned |    $1 |
+
+!!!**Test content** goes `here`
 
 **Some python code!**
 
@@ -24,6 +30,8 @@ def somefunc(param1='', param2=0):
 ```
 
 Python time!
+
+`View more at: http://python.com`
 
 ```
 class SomeClass:

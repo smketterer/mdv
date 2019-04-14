@@ -77,6 +77,8 @@ module.exports = require("blessed-vue");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blessed_vue__);
 //
 //
 //
@@ -91,6 +93,8 @@ const fs = __webpack_require__(7)
 const marked = __webpack_require__(8)
 const TerminalRenderer = __webpack_require__(9)
 
+
+
 marked.setOptions({
   renderer: new TerminalRenderer()
 })
@@ -100,8 +104,8 @@ marked.setOptions({
   computed: {
     contentStyle: function() {
       return {
-        hover: {
-          // bg: 'gray'
+        scrollbar: {
+          bg: 'gray'
         },
       }
     }
@@ -145,16 +149,24 @@ marked.setOptions({
   methods: {
     prevSlide() {
       if (this.page > 0) {
+        this.pageContent = ''
+        this.$refs.content.setScroll(0)
         this.page -= 1
         this.pageTitle = marked(this.pages[this.page].split(/\n/)[0])
-        this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default.a.nextTick(() => {
+          this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        })
       }
     },
     nextSlide() {
       if (this.page < this.pages.length - 2) {
+        this.pageContent = ''
+        this.$refs.content.setScroll(0)
         this.page += 1
         this.pageTitle = marked(this.pages[this.page].split(/\n/)[0])
-        this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default.a.nextTick(() => {
+          this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        })
       }
     }
   }
@@ -386,7 +398,7 @@ var render = function() {
         "box",
         {
           attrs: {
-            border: { type: "line", ch: "@" },
+            border: { type: "line" },
             top: this.pageTitle ? 4 : 2,
             bottom: 2,
             left: 4,
@@ -403,6 +415,7 @@ var render = function() {
               left: 2,
               right: 2,
               autofocus: true,
+              scrollbar: true,
               alwaysScroll: true,
               scrollable: true,
               mouse: true,

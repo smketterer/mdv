@@ -1,8 +1,8 @@
 <template>
   <screen ref="screen" :smartCSR="true" :autoPadding="true">
     <text top="0" left="center" :top="2" :content="`${ this.pageTitle }`" />
-    <box :border="{ type: 'line', ch: '@' }" :top="this.pageTitle ? 4 : 2" :bottom="2" :left="4" :right="4" >
-      <box ref="content" @click="nextSlide" :top="1" :bottom="1" :left="2" :right="2" :autofocus="true" :style="contentStyle" :alwaysScroll="true" :scrollable="true" :mouse="true" :keys="true" :vi="true" :content="this.pageContent" />
+    <box :border="{ type: 'line' }" :top="this.pageTitle ? 4 : 2" :bottom="2" :left="4" :right="4" >
+      <box ref="content" @click="nextSlide" :top="1" :bottom="1" :left="2" :right="2" :autofocus="true" :style="contentStyle" :scrollbar="true" :alwaysScroll="true" :scrollable="true" :mouse="true" :keys="true" :vi="true" :content="this.pageContent" />
     </box>
   </screen>
 </template>
@@ -11,6 +11,8 @@
 const fs = require('fs')
 const marked = require('marked')
 const TerminalRenderer = require('marked-terminal')
+
+import Vue from 'blessed-vue'
 
 marked.setOptions({
   renderer: new TerminalRenderer()
@@ -21,8 +23,8 @@ export default {
   computed: {
     contentStyle: function() {
       return {
-        hover: {
-          // bg: 'gray'
+        scrollbar: {
+          bg: 'gray'
         },
       }
     }
@@ -66,16 +68,24 @@ export default {
   methods: {
     prevSlide() {
       if (this.page > 0) {
+        this.pageContent = ''
+        this.$refs.content.setScroll(0)
         this.page -= 1
         this.pageTitle = marked(this.pages[this.page].split(/\n/)[0])
-        this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        Vue.nextTick(() => {
+          this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        })
       }
     },
     nextSlide() {
       if (this.page < this.pages.length - 2) {
+        this.pageContent = ''
+        this.$refs.content.setScroll(0)
         this.page += 1
         this.pageTitle = marked(this.pages[this.page].split(/\n/)[0])
-        this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        Vue.nextTick(() => {
+          this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+        })
       }
     }
   }
