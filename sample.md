@@ -37,7 +37,7 @@ Here's some stuff:
 ```HTML
    ^^^^~
   ( o_o)     isn't this neat?
-    |  \/
+  /   \/
             i think it's ok =|:^)
 ```
 
