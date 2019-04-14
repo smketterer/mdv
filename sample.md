@@ -14,6 +14,14 @@ Ordered
 
 [1]: Footnote **can have markup** and multiple paragraphs.
 
+```HTML
+  ~^^^^
+  (o_o )  stop
+  u- -u
+    |       just stop
+   / \
+```
+
 Here's some stuff:
 - List goes Here
   - A **sub-item**!
@@ -25,6 +33,13 @@ Here's some stuff:
 | col 1 is |  left-aligned | $1600 |
 | col 2 is |    centered   |   $12 |
 | col 3 is | right-aligned |    $1 |
+
+```HTML
+   ^^^^~
+  ( o_o)     isn't this neat?
+    |  \/
+            i think it's ok =|:^)
+```
 
 !!!**Test content** goes `here`
 
