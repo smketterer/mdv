@@ -12,7 +12,7 @@ Ordered
 2. Consectetur adipiscing elit
 3. Integer molestie lorem at massa
 
-[1]: Footnote **can have markup** and multiple paragraphs!!!
+[1]: Footnote **can have markup** and multiple paragraphs.
 
 ```HTML
   ~^^^^
