@@ -97,33 +97,66 @@ marked.setOptions({
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
+  computed: {
+    contentStyle: function() {
+      return {
+        hover: {
+          // bg: 'gray'
+        },
+      }
+    }
+  },
   data: function() {
     return {
-      file: '',
-      fileContents: '',
+      page: 0,
+      pages: [],
+      pageTitle: '',
+      pageContent: '',
     }
   },
   mounted: function() {
     // Close the program when CTRL+C is pressed.
-    this.$refs.screen.key(['C-c'], () => {
+    this.$refs.screen.key(['C-c', 'escape'], () => {
       process.exit(0)
     })
+
+    this.$refs.content.focus()
 
     // Error if no file provided.
     if (typeof process.argv[2] === 'undefined') {
       throw new Error("No file provided.")
     }
 
-    // Set the file
-    this.file = process.argv[2]
-
-    // Read file with UTF-8 encoding
-     fs.readFile(`${ this.file }`, 'utf8', (err, contents) => {
+    // Read file with UTF-8 encoding, splitting it into pages based on !!!
+     fs.readFile(process.argv[2], 'utf8', (err, contents) => {
        // Generates SGR sequences which can be read by blessed.
-       this.fileContents = marked(contents)
-       // Go through and syntax highlight afterwords...
+       this.pages = contents.split('!!!').slice(1)
+       this.pageTitle = marked(this.pages[0].split(/\n/)[0])
+       this.pageContent = marked(this.pages[0].split(/\n/).slice(1).join('\n'))
      })
-    // console.log(marked(this.fileContents))
+
+    this.$refs.screen.key(['right', 'space'], () => {
+      this.nextSlide()
+    })
+    this.$refs.screen.key(['left'], () => {
+      this.prevSlide()
+    })
+  },
+  methods: {
+    prevSlide() {
+      if (this.page > 0) {
+        this.page -= 1
+        this.pageTitle = marked(this.pages[this.page].split(/\n/)[0])
+        this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+      }
+    },
+    nextSlide() {
+      if (this.page < this.pages.length - 2) {
+        this.page += 1
+        this.pageTitle = marked(this.pages[this.page].split(/\n/)[0])
+        this.pageContent = marked(this.pages[this.page].split(/\n/).slice(1).join('\n'))
+      }
+    }
   }
 });
 
@@ -149,7 +182,7 @@ var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
-var __vue_module_identifier__ = "7f7de4c0"
+var __vue_module_identifier__ = "1a190e20"
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_472cff63_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
@@ -338,31 +371,50 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "screen",
-    {
-      ref: "screen",
-      attrs: { smartCSR: true, autoPadding: true, title: "" + this.file }
-    },
+    { ref: "screen", attrs: { smartCSR: true, autoPadding: true } },
     [
-      _c("box", { attrs: { top: 0, left: 0, height: "100%", width: "100%" } }, [
-        _c("text", {
-          staticStyle: { fg: "white", bold: "true" },
-          attrs: { top: "0", left: "center", content: "" + this.file }
-        })
-      ]),
-      _vm._v(" "),
-      _c("box", {
+      _c("text", {
         attrs: {
-          top: 1,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          border: { type: "bg" },
-          alwaysScroll: true,
-          scrollable: true,
-          mouse: true,
-          content: this.fileContents
+          top: "0",
+          left: "center",
+          top: 2,
+          content: "" + this.pageTitle
         }
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "box",
+        {
+          attrs: {
+            border: { type: "line", ch: "@" },
+            top: this.pageTitle ? 4 : 2,
+            bottom: 2,
+            left: 4,
+            right: 4
+          }
+        },
+        [
+          _c("box", {
+            ref: "content",
+            style: _vm.contentStyle,
+            attrs: {
+              top: 1,
+              bottom: 1,
+              left: 2,
+              right: 2,
+              autofocus: true,
+              alwaysScroll: true,
+              scrollable: true,
+              mouse: true,
+              keys: true,
+              vi: true,
+              content: this.pageContent
+            },
+            on: { click: _vm.nextSlide }
+          })
+        ],
+        1
+      )
     ],
     1
   )
