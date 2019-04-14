@@ -4,6 +4,16 @@ It's in the game. Lorem ipsum dolor sit amet, avec lorem ipsum et il est une pet
 
 http://example.com
 
+> "The only thing we have to fear is fear itself" – Some Guy
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+[1]: Footnote **can have markup** and multiple paragraphs.
+
 Here's some stuff:
 - List goes Here
   - A **sub-item**!
