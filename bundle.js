@@ -118,7 +118,7 @@ marked.setOptions({
     this.file = process.argv[2]
 
     // Read file with UTF-8 encoding
-     fs.readFile(`./${ this.file }`, 'utf8', (err, contents) => {
+     fs.readFile(`${ this.file }`, 'utf8', (err, contents) => {
        // Generates SGR sequences which can be read by blessed.
        this.fileContents = marked(contents)
        // Go through and syntax highlight afterwords...
@@ -149,7 +149,7 @@ var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
-var __vue_module_identifier__ = "7f7de4c0"
+var __vue_module_identifier__ = "0e5c4d74"
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_472cff63_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],

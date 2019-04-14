@@ -39,7 +39,7 @@ export default {
     this.file = process.argv[2]
 
     // Read file with UTF-8 encoding
-     fs.readFile(`./${ this.file }`, 'utf8', (err, contents) => {
+     fs.readFile(`${ this.file }`, 'utf8', (err, contents) => {
        // Generates SGR sequences which can be read by blessed.
        this.fileContents = marked(contents)
        // Go through and syntax highlight afterwords...
