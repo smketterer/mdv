@@ -11,7 +11,6 @@
 const fs = require('fs')
 const marked = require('marked')
 const TerminalRenderer = require('marked-terminal')
-const highlight = require('cli-highlight').highlight
 
 marked.setOptions({
   renderer: new TerminalRenderer()
@@ -43,7 +42,6 @@ export default {
      fs.readFile(`./${ this.file }`, 'utf8', (err, contents) => {
        // Generates SGR sequences which can be read by blessed.
        this.fileContents = marked(contents)
-       fs.writeFile("log.txt", this.fileContents, function(e) {});
        // Go through and syntax highlight afterwords...
      })
     // console.log(marked(this.fileContents))

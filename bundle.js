@@ -87,10 +87,9 @@ module.exports = require("blessed-vue");
 //
 //
 
-const fs = __webpack_require__(8)
-const marked = __webpack_require__(9)
-const TerminalRenderer = __webpack_require__(10)
-const highlight = __webpack_require__(7).highlight
+const fs = __webpack_require__(7)
+const marked = __webpack_require__(8)
+const TerminalRenderer = __webpack_require__(9)
 
 marked.setOptions({
   renderer: new TerminalRenderer()
@@ -122,7 +121,6 @@ marked.setOptions({
      fs.readFile(`./${ this.file }`, 'utf8', (err, contents) => {
        // Generates SGR sequences which can be read by blessed.
        this.fileContents = marked(contents)
-       fs.writeFile("log.txt", this.fileContents, function(e) {});
        // Go through and syntax highlight afterwords...
      })
     // console.log(marked(this.fileContents))
@@ -151,7 +149,7 @@ var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
-var __vue_module_identifier__ = "7f7de4c0"
+var __vue_module_identifier__ = "0e5c4d74"
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_472cff63_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
@@ -172,7 +170,7 @@ Component.options.__file = "App.vue"
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blessed_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuex__);
 
 
@@ -385,28 +383,22 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("cli-highlight");
+module.exports = require("fs");
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = require("fs");
+module.exports = require("marked");
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = require("marked");
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
 module.exports = require("marked-terminal");
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("vuex");
