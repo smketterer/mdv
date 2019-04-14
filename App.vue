@@ -51,12 +51,12 @@ export default {
     }
 
     // Read file with UTF-8 encoding, splitting it into pages based on !!!
-     fs.readFile(process.argv[2], 'utf8', (err, contents) => {
-       // Generates SGR sequences which can be read by blessed.
-       this.pages = contents.split('!!!').slice(1)
-       this.pageTitle = marked(this.pages[0].split(/\n/)[0])
-       this.pageContent = marked(this.pages[0].split(/\n/).slice(1).join('\n'))
-     })
+    fs.readFile(process.argv[2], 'utf8', (err, contents) => {
+      // Generates SGR sequences which can be read by blessed.
+      this.pages = contents.split('!!!').slice(1)
+      this.pageTitle = marked(this.pages[0].split(/\n/)[0])
+      this.pageContent = marked(this.pages[0].split(/\n/).slice(1).join('\n'))
+    })
 
     this.$refs.screen.key(['right', 'space'], () => {
       this.nextSlide()
