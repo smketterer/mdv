@@ -8,8 +8,14 @@ A simple, styled command-line presentation tool using markdown, built with `bles
 ## Build Setup
 
 ```bash
+# Install dependencies
 npm install
+
+# Example of a presentation
 npm run start sample.md
+
+# Example of a flat markdown file
+npm run start sample2.md
 ```
 
 ## Creating a Presentation
