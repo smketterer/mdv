@@ -1,7 +1,7 @@
 <template>
   <screen ref="screen" :smartCSR="true" :autoPadding="true" :title="`${ this.file }`">
-    <box style="bg: white" :top="0" :left="0" :height="'100%'" :width="'100%'">
-      <text style="bg: white; fg: black; bold: true;" top="0" left="center" :content="`file: ${ this.file }`" />
+    <box :top="0" :left="0" :height="'100%'" :width="'100%'">
+      <text style="fg: white; bold: true;" top="0" left="center" :content="`${ this.file }`" />
     </box>
     <box :top="1" :left="0" height="100%" width="100%" :border="{ type: 'bg' }" :alwaysScroll="true" :scrollable="true" :mouse="true" :content="this.fileContents" />
   </screen>
