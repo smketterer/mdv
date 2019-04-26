@@ -21,7 +21,7 @@ npm run start sample2.md
 ## Creating a Presentation
 
 Normal Markdown rules apply, with the following exceptions:
-- Pages are separated by `!!!` characters and slide titles can be provided by `!!!Example slide title.`
+- Pages are separated by \!\!\! characters and slide titles can be provided by \!\!\!Example slide title.
 - Links will only show the href, to allow clicking through from the terminal.
 - Common usage examples are illustrated in `sample.md`.
 
