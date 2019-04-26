@@ -19,8 +19,6 @@
     "chalk": "^2.4.2",
     "cli-highlight": "^2.1.0",
     "marked-terminal": "git+ssh://git@github.com/smketterer/marked-terminal.git",
-    "moment": "^2.18.1",
-    "pretty-seconds": "^0.2.1",
     "vuex": "^3.0.1"
   }
 }
